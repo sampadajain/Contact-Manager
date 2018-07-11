@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Contact Manager</title>
+    <link href="dependencies/css/bootstrap.min.css" rel="stylesheet">
+    <link href="app/css/main.css" rel="stylesheet">
+  </head>
+  <body>
+    <header class="bs-header">
+      <nav class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <h1 class="navbar-brand" >            
+            Contact Manager
+          </h1>
+        </div>
+        <div class="collapse navbar-collapse" id="navbar-collapse">
+          <div class="nav navbar-right navbar-btn">
+            <a href="#contacts/new" class="btn btn-default" data-display='true'>
+              <i class="glyphicon glyphicon-plus"></i> 
+              Add Contact
+            </a>
+	    <a href="#contacts" class="btn btn-default selected" >
+              <i class="glyphicon glyphicon-th-large" title="Grid View"></i> 
+            </a>
+          </div>
+        </div>
+      </div>
+    </nav>
+    </header>
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12 main-container" id="main_container">
+      </div>
+    </div>
+
+
+    <script type="text/template" id="template_contacts">
+          <ul class="media-list row contacts-container"></ul>
+    </script>
+
+    <script type="text/template" id="template_contact">
+	<div class="thumbnail">
+	    <a href="#contacts/edit/<%=id %>"><img class="media-object" src="app/img/faces/<%=avatar %>"></a>
+	</div>
+	<div class="media-heading">
+           <h3 class="display-name"><%=firstName%> <%=lastName%>
+	   <small>
+		    <a href="#contacts/edit/<%=id %>"><span class="glyphicon glyphicon-pencil" title="Edit"></span></a>
+		    <a href="#contacts/delete/<%=id %>" class="delete-contact">
+			<span class="glyphicon glyphicon-trash" title="Delete"></span>
+		    </a>
+		</small>
+	   </h3>
+       </div>
+	<div class="media-body">
+	<address>
+		<div class='email'><b>Email: </b><%=email%></div>
+		<div class='phone'><b>Phone: </b> <%=phone%></div>
+	</address>
+	</div>
+    </script>
+
+    <script type="text/template" id="template_new_contact">
+            <div class="page-header">
+              <h2><%= isNew ? 'New' : 'Edit' %> Contact</h2>
+            </div>
+            <div class="panel-body">
+		<form role="form" class="form-horizontal contract-form">
+                <div class="row">
+                  <div class="col-md-8">
+                    <div class="form-group">
+                      <label for="name" class="control-label col-md-3">First Name</label>
+                      <div class="col-md-8">
+                        <input type="text" name="firstName" id="fname" class="form-control contact-fname-input" placeholder='Enter first name' value="<%=firstName %>">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="company" class="control-label col-md-3">Last Name</label>
+                      <div class="col-md-8">
+			<input type="text" name="lastName" id="lname" class="form-control contact-lname-input" placeholder='Enter last name' value="<%=lastName %>">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="email" class="control-label col-md-3">Email</label>
+                      <div class="col-md-8">
+			<input type="email" name="email" id="email" class="form-control contact-email-input" placeholder='abc@gmail.com'value="<%=email %>">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="phone" class="control-label col-md-3">Phone</label>
+                      <div class="col-md-8">
+			<input type="tel" name="phone" id="phone" class="form-control contact-tel-input" placeholder='Enter phone number' value="<%=phone %>">
+                      </div>
+                    </div>
+
+                    <div class="form-group">
+                      <label for="group" class="control-label col-md-3">Group</label>
+                      <div class="col-md-8">
+                        <select name="group" id="group" class="form-control contact-group-select">
+                          <option value="">Select group(ex: Family,Friends)</option>
+                          <option value="1">Family</option>
+                          <option value="2">Friend</option>
+                          <option value="3">Other</option>
+                        </select>
+                      </div>
+                    </div>
+
+                  </div>
+                  <div class="col-md-4 file-field">
+			<div class="fileinput fileinput-new" data-provides="fileinput">
+			   <div class="fileinput-new thumbnail" style="width: 150px; height: 150px;">
+				  <img src="<%=avatar ? 'app/img/faces/'+ avatar : 'app/img/faces/placeholder-avatar.jpg' %>" alt="Photo" id="imagePreview">
+			    </div> 
+
+			 <div class="d-flex justify-content-right">
+			     <label for="imageUpload" class="btn btn-outline btn-md">Add Photo</label>
+				<input type="file" name="imageUpload" id="imageUpload" class="hide" style="display:none">
+			 </div>
+            	       </div>
+      		  </div>
+        <div class="col-md-8">
+          <div class="row">
+              <div class="form-group">
+          	<div class="col-sm-offset-4 col-sm-3">
+            		<button type="submit" class="btn btn-outline btn-lg btn-block">Submit</button>
+          	</div>
+          	<div class="col-sm-3">
+	            <a href="#contacts" class="btn btn-outline btn-lg btn-block">Cancel</a>
+        	</div>
+              </div>
+           </div>
+        </div>
+	</form>
+</div>
+
+
+    </script>
+    <script type="text/template" id="tpl-new-contact">
+	
+    </script>	
+    <script src="dependencies/js/jquery.js"></script>
+    <script src="dependencies/js/underscore.js"></script>
+    <script src="dependencies/js/backbone.js"></script>
+    <script src="dependencies/js/bootstrap.min.js"></script>
+
+    <script src="app/js/app.js"></script>
+    <script src="app/js/models/contact.js"></script>
+    <script src="app/js/collections/contacts.js"></script>
+    <script src="app/js/views/contact.js"></script>
+    <script src="app/js/views/contacts.js"></script>
+    <script src="app/js/views/contactForm.js"></script>
+    <script src="app/js/router.js"></script>
+
+    <script>
+      $(function() {
+        ContactManager.start({
+          contacts: [
+            {
+              id: 1,
+              firstName : 'Maicheal',
+   	      lastName: 'Satfield',
+              phone: '651-603-1723',
+              email: 'MaichealSatfield@rhyta.com',
+              status: 'active',
+	      avatar: '2.png'
+            },
+            {
+              id: 2,
+              firstName : 'Christiano',
+   	      lastName: 'Roanldo',
+              phone: '651-603-1723',
+              email: 'ChristianoRonaldo@dayrep.com',
+              status: 'active',
+	      avatar: '1.png'
+            },
+            {
+              id: 3,
+              firstName : 'Ricky',
+   	      lastName: 'Dominick',
+              phone: '651-603-1723',
+              email: 'RickyDominick@rhyta.com',
+              status: 'active',
+	      avatar: '3.png'
+            },
+            {
+              id: 4,
+              firstName : 'Michael',
+   	      lastName: 'Baynene',
+              phone: '651-603-1723',
+              email: 'MichaelKBayne@rhyta.com',
+              status: 'active',
+	      avatar: '4.png'
+            },
+            {
+              id: 5,
+              firstName : 'Johnny',
+   	      lastName: 'Wilsond',
+              phone: '651-603-1723',
+              email: 'JohnIWilsond@rhyta.com',
+              status: 'active',
+	      avatar: '3.png'
+            },
+            {
+              id: 6,
+              firstName : 'Rodolfo',
+   	      lastName: 'Robinett',
+              phone: '651-603-1723',
+              email: 'RodolfoPRobinett@rhyta.com',
+              status: 'active',
+	      avatar: '8.png'
+            },
+            {
+              id: 7,
+              firstName : 'Reddiff',
+   	      lastName: 'Robinett',
+              phone: '651-603-1723',
+              email: 'ReddiffPRobinett@rhyta.com',
+              status: 'active',
+	      avatar: '2.png'
+            },
+           {
+              id: 8,
+              firstName : 'Rebicca',
+   	      lastName: 'Montenna',
+              phone: '651-603-1723',
+              email: 'RebiccaMontenna@rhyta.com',
+              status: 'active',
+	      avatar: '7.png'
+            },
+           {
+              id: 9,
+              firstName : 'Samantha',
+   	      lastName: 'Montenna',
+              phone: '651-603-1723',
+              email: 'SamanthaMontenna@rhyta.com',
+              status: 'active',
+	      avatar: '5.png'
+            }
+          ]
+        });
+      });
+    </script>
+  </body>
+</html>
