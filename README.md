@@ -8,13 +8,19 @@ These instructions will get you a copy of the project up and running on your loc
 
 To view this SPA of contanct manager download zip or clone this git project on your local machine and open index.html page.
 
+Using this app you can:
+1. Add new contact you can upload a photo of contact.
+2. Edit exsisting contact by clicking the pencil icon next to contact name.
+3. Delete contact by clicking the delete icon next to contact name.
 
+**NOTE:** `This app is currently a single page application with no server connections hence updates to contacts are not currently retained.`
 
 ### Installing
 
 A step by step series of examples that tell you how to get a development environment running
 Clone or Download this app and run index.html page. You will see a screen like below:
 
+![contactmanager](https://user-images.githubusercontent.com/12445384/42549503-237ec1ac-84ea-11e8-8909-29a0876c837d.png)
 
 For running Unit test cases install Karma. Karma runs on Node.js and is available as an NPM package.
 
@@ -57,6 +63,11 @@ Currently this is a single page application which doesn't connect to server. Onc
 * [Bootstrap](https://getbootstrap.com/) - Used to generate responsive UI
 * [Karma](https://karma-runner.github.io/2.0/index.html)- Used to run automated unit test cases
  
+## Future Enhancements
+Below are planned future enahncements:
+
+1. Validations of form fields. For ex: Only number should be allowed in phone field. Before submitting form a confirmation popup appears.
+2. List view of the contacts. Currently there is only grid view. There will be a button next to grid icon on clicking of which we will see contacts in list view.
 
 ## Authors
 
