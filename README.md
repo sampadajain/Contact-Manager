@@ -31,7 +31,7 @@ For running Unit test cases install Karma. Karma runs on Node.js and is availabl
 
 This will run the unit testcases.
 
-For Acceptance testing using Codeceptjs follow below setps:
+For Acceptance testing using Codeceptjs follow below setps:(Currently no testcases added for acceptance testing but will be added in next release)
 
 ```
 01. Make sure NodeJS is 6.11.1 or Higher (node --version)
