@@ -1,6 +1,6 @@
 # Contact Manager
 
-Contact Manager is a simple backbonejs application. This can be used to read contancts, Delete(inactivate contacts), edit and add new contacts.
+Contact Manager is a simple backbonejs application. This can be used to read contacts, delete(inactivate contacts), edit and add new contacts.
 
 ## Getting Started
 
